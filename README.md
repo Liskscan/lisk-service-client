@@ -22,6 +22,8 @@ yarn add @liskscan/lisk-service-client
 ### Getting started
 To start using the Lisk Service Client, you need to create a new service client:
 ```js
+import { LiskService } from "@liskscan/lisk-service-client"
+
 const service = new LiskService({
   url: "service.lisk.com",
   disableTLS: true,     // default false
