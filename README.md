@@ -1,7 +1,7 @@
 # Lisk Service client
-![Lisk service client version](https://img.shields.io/github/package-json/v/liskscan/lisk-service-client?color=green)
+[![Lisk service client version](https://img.shields.io/github/package-json/v/liskscan/lisk-service-client?color=green)](https://github.com/liskscan/lisk-service-client)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-![Lisk service compatibility](https://img.shields.io/badge/lisk--service-0.7.0--beta.0-blue)
+[![Lisk service compatibility](https://img.shields.io/badge/lisk--service-0.7.0--beta.0-blue)](https://github.com/liskhq/lisk-service)
 
 
 
