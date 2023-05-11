@@ -1,0 +1,26 @@
+{
+  "name": "@liskscan/lisk-service-client",
+  "version": "0.0.1",
+  "description": "Lisk service ts client",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "rm -rf ./lib && tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "author": "Liskscan BV <info@liskscan.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.1.2",
+    "prettier": "^2.8.8",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "socket.io-client": "^4.6.1"
+  }
+}
