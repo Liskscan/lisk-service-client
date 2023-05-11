@@ -1,6 +1,6 @@
 {
   "name": "@liskscan/lisk-service-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Lisk service ts client",
   "main": "lib/index.js",
   "scripts": {
@@ -13,6 +13,16 @@
   ],
   "author": "Liskscan BV <info@liskscan.com>",
   "license": "Apache-2.0",
+  "keywords": [
+    "lisk",
+    "blockchain",
+    "explorer"
+  ],
+  "homepage": "https://github.com/liskscan/lisk-service-client#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liskscan/lisk-service-client.git"
+  },
   "devDependencies": {
     "@types/node": "^20.1.2",
     "prettier": "^2.8.8",
