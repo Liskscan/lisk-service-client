@@ -19,6 +19,8 @@ import {
   ErrorResponse,
   Events,
   EventsMethodResponses,
+  PostCallsRPC,
+  PostCallTypesRPC,
 } from "./types"
 
 export type FromToNumber = `${number}:${number}`
@@ -41,11 +43,21 @@ export type LiskServiceClient = <T extends Calls>(
   call: T,
   params?: CallTypes[T]["params"]
 ) => Promise<CallTypes[T]["response"] | ErrorResponse>
-
-export type LiskWSServiceClient = <T extends CallsRPC>(
+export type RPCCalls = CallsRPC | PostCallsRPC
+export type RPCParams<T extends RPCCalls> = T extends CallsRPC
+  ? CallTypesRPC[T]["params"]
+  : T extends PostCallsRPC
+  ? PostCallTypesRPC[T]["params"]
+  : undefined
+export type RPCResponses<T extends RPCCalls> = T extends CallsRPC
+  ? CallTypesRPC[T]["response"] | ErrorResponse
+  : T extends PostCallsRPC
+  ? PostCallTypesRPC[T]["response"] | ErrorResponse
+  : ErrorResponse
+export type LiskWSServiceClient = <T extends RPCCalls>(
   call: T,
-  params?: CallTypesRPC[T]["params"]
-) => Promise<CallTypesRPC[T]["response"] | ErrorResponse>
+  params?: RPCParams<T>
+) => Promise<RPCResponses<T>>
 
 export type LiskWSEvent = <T extends Events>(
   method: T,

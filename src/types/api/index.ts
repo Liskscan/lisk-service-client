@@ -196,11 +196,7 @@ import {
 } from "./validator"
 import { LimitOffset } from "../../types"
 
-export type ErrorCall = "error"
-export type ErrorCallRPC = "get.error"
-
 export type Calls =
-  | ErrorCall
   | AuthCall
   | BlocksCall
   | BlocksAssetsCall
@@ -241,7 +237,6 @@ export type Calls =
   | ValidatorCall
 
 export type CallsRPC =
-  | ErrorCallRPC
   | AuthCallRPC
   | BlocksCallRPC
   | BlocksAssetsCallRPC
@@ -255,7 +250,6 @@ export type CallsRPC =
   | ExportTransactionsCallRPC
   | FeesCallRPC
   | GeneratorsCallRPC
-  | InvokeCallRPC
   | LegacyCallRPC
   | MarketPricesCallRPC
   | NetworkPeersCallRPC
@@ -279,12 +273,13 @@ export type CallsRPC =
   | TokenSummaryCallRPC
   | TransactionsCallRPC
   | TransactionsStatisticsCallRPC
+  | ValidatorCallRPC
+export type PostCallsRPC =
+  | InvokeCallRPC
   | PostTransactionsCallRPC
   | PostTransactionsDryRunCallRPC
-  | ValidatorCallRPC
 
 export type CallTypes = {
-  error: { response: ErrorResponse; params: {} }
   auth: { response: AuthResponse; params: AuthParams }
   blocks: { response: BlocksResponse; params: BlocksParams }
   "blocks/assets": {
@@ -434,7 +429,6 @@ export type CallTypes = {
 }
 
 export type CallTypesRPC = {
-  "get.error": { response: ErrorResponse; params: {} }
   "get.auth": { response: AuthResponse; params: AuthParams }
   "get.blocks": { response: BlocksResponse; params: BlocksParams }
   "get.blocks.assets": {
@@ -480,10 +474,6 @@ export type CallTypesRPC = {
   "get.generators": {
     response: GeneratorsResponse
     params: LimitOffset
-  }
-  "post.invoke": {
-    response: InvokeResponse
-    params: InvokeParams
   }
   "get.legacy": {
     response: LegacyResponse
@@ -580,6 +570,13 @@ export type CallTypesRPC = {
   "get.validator": {
     response: ValidatorResponse
     params: ValidatorParams
+  }
+}
+
+export type PostCallTypesRPC = {
+  "post.invoke": {
+    response: InvokeResponse
+    params: InvokeParams
   }
   "post.transactions.dryrun": {
     response: PostTransactionsDryrunResponse

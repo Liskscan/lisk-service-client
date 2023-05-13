@@ -21,6 +21,10 @@ import {
   LiskServiceProps,
   LiskWSEvent,
   LiskWSServiceClient,
+  PostCallsRPC,
+  PostCallTypesRPC,
+  RPCCalls,
+  RPCResponses,
 } from "./types"
 
 export * from "./types"
@@ -85,7 +89,7 @@ export class LiskService implements LiskServiceClass {
       }
       return new Promise((resolve) =>
         setTimeout(async () => resolve(await this.rpc(call, params)), 50)
-      ) as Promise<ErrorResponse | CallTypesRPC[CallsRPC]["response"]>
+      ) as Promise<RPCResponses<RPCCalls>>
     }
     try {
       return new Promise((resolve, reject) => {
@@ -108,7 +112,7 @@ export class LiskService implements LiskServiceClass {
                 status: "error",
                 error: true,
                 message: response.error.message,
-              })
+              } as ErrorResponse)
             }
           }
         )
@@ -119,7 +123,7 @@ export class LiskService implements LiskServiceClass {
           error: true,
           message: e.message,
         } as ErrorResponse
-      }) as Promise<ErrorResponse | CallTypesRPC[CallsRPC]["response"]>
+      }) as Promise<RPCResponses<any>>
     } catch (e) {
       return {
         status: "error",
