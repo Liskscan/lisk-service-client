@@ -16,7 +16,6 @@ export type Error = "error"
 export type ResponseStatus = {
   status: Error | Success
   error?: boolean
-  data?: any
 }
 
 export interface ErrorResponse extends ResponseStatus {
