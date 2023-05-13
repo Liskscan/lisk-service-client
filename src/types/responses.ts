@@ -16,13 +16,12 @@ export type Error = "error"
 export type ResponseStatus = {
   status: Error | Success
   error?: boolean
-  data?: {}[]
-  meta?: {}
+  data?: any
 }
 
 export interface ErrorResponse extends ResponseStatus {
   status: Error
-  error: boolean
+  error: true
   message: string
 }
 
