@@ -18,8 +18,21 @@ export type SchemasCallRPC = "get.schemas"
 
 export type SchemasParams = undefined
 
+export type Schema = {
+  $id: string
+  type: string
+  properties: Record<string, Record<string, any>>
+  required: string[]
+}
+export type Messages = { moduleCommand: string; params: string; schema: Schema }
+export type Command = { moduleCommand: string; schema: Schema }
+export type Assets = { module: string; version: string; schema: Schema }
+export type Events = { module: string; name: string; schema: Schema }
 export interface SchemasResponse extends ResponseStatus {
   status: Success
-  data: unknown
+  data: Record<
+    string,
+    { schema: Schema } | Events[] | Assets[] | Command[] | Messages[]
+  >
   meta: {}
 }

@@ -18,7 +18,7 @@ export type InvokeCallRPC = "post.invoke"
 
 export interface InvokeParams {
   endpoint: string
-  params?: any
+  params?: Record<string, any>
 }
 
 export interface InvokeResponse extends ResponseStatus {
@@ -26,6 +26,6 @@ export interface InvokeResponse extends ResponseStatus {
   data: any
   meta: {
     endpoint: string
-    params: any
+    params: Record<string, any>
   }
 }

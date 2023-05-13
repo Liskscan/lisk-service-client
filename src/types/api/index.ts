@@ -174,6 +174,11 @@ import {
   TokenSummaryResponse,
 } from "./token"
 import {
+  PostTransactionsCallRPC,
+  PostTransactionsDryRunCallRPC,
+  PostTransactionsDryrunResponse,
+  PostTransactionsParams,
+  PostTransactionsResponse,
   TransactionsCall,
   TransactionsCallRPC,
   TransactionsParams,
@@ -274,6 +279,8 @@ export type CallsRPC =
   | TokenSummaryCallRPC
   | TransactionsCallRPC
   | TransactionsStatisticsCallRPC
+  | PostTransactionsCallRPC
+  | PostTransactionsDryRunCallRPC
   | ValidatorCallRPC
 
 export type CallTypes = {
@@ -574,6 +581,14 @@ export type CallTypesRPC = {
     response: ValidatorResponse
     params: ValidatorParams
   }
+  "post.transactions.dryrun": {
+    response: PostTransactionsDryrunResponse
+    params: PostTransactionsDryrunResponse
+  }
+  "post.transactions": {
+    response: PostTransactionsResponse
+    params: PostTransactionsParams
+  }
 }
 
 export {
@@ -729,4 +744,9 @@ export {
   ValidatorParams,
   ValidatorResponse,
   LimitOffset,
+  PostTransactionsParams,
+  PostTransactionsDryrunResponse,
+  PostTransactionsResponse,
+  PostTransactionsDryRunCallRPC,
+  PostTransactionsCallRPC,
 }

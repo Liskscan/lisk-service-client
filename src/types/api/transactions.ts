@@ -23,6 +23,8 @@ import {
 
 export type TransactionsCall = "transactions"
 export type TransactionsCallRPC = "get.transactions"
+export type PostTransactionsCallRPC = "post.transactions"
+export type PostTransactionsDryRunCallRPC = "post.transactions.dryrun"
 export type TransactionsStatisticsCall = "transactions/statistics"
 export type TransactionsStatisticsCallRPC = "get.transactions.statistics"
 
@@ -40,10 +42,50 @@ export interface TransactionsParams extends LimitOffset {
   sort?: Sort<"timestamp"> | Sort<"height">
   order?: Sort<"index">
 }
+
+export interface PostTransactionsParams {
+  transaction: string
+}
+export interface PostTransactionsDryrunParams {
+  skipDecode: boolean
+  skipVerify: boolean
+  transaction:
+    | string
+    | {
+        module: string
+        command: string
+        fee: NumberString
+        nonce: NumberString
+        senderPublicKey: string
+        signatures: string[]
+        params: Record<string, any>
+      }
+}
 export interface TransactionsStatisticsParams extends LimitOffset {
   interval: "day" | "month"
 }
 
+export interface PostTransactionsResponse extends ResponseStatus {
+  status: Success
+  message: string
+  transactionID: string
+}
+export interface PostTransactionsDryrunResponse extends ResponseStatus {
+  status: Success
+  data: {
+    result: number
+    status: string
+    events: {
+      data: any
+      index: number
+      module: string
+      name: string
+      topics: string[]
+      height: number
+    }[]
+  }
+  meta: {}
+}
 export interface TransactionsResponse extends ResponseStatus, MetaList {
   status: Success
   data: {
