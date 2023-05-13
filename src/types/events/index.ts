@@ -50,3 +50,16 @@ export type EventsMethodResponses = {
   "update.round": { response: RoundChangeEvent }
   "update.metadata": { response: MetaDataChangeEvent }
 }
+
+export {
+  NewBlock,
+  DeleteBlock,
+  NewTransactions,
+  DeleteTransactions,
+  UpdateRound,
+  UpdateGenerators,
+  UpdateFeeEstimates,
+  UpdateMetaData,
+  RoundChangeEvent,
+  MetaDataChangeEvent,
+}

@@ -13,15 +13,17 @@
  */
 import { io } from "socket.io-client"
 import {
+  CallsRPC,
+  CallTypesRPC,
+  ErrorResponse,
   LiskServiceClass,
   LiskServiceClient,
   LiskServiceProps,
   LiskWSEvent,
   LiskWSServiceClient,
 } from "./types"
-import { ErrorResponse } from "./types/responses"
-import { EventsResponses } from "./types/events"
-import { CallsRPC, CallTypesRPC } from "./types/api"
+
+export * from "./types"
 
 export class LiskService implements LiskServiceClass {
   wsUrl
@@ -136,19 +138,13 @@ export class LiskService implements LiskServiceClass {
     if (!this.blockchain.connected) {
       setTimeout(() => this.subscribe(method, listener), 100)
     }
-    this.blockchain.on(
-      method,
-      ({ data }: { data: EventsResponses | ErrorResponse }) => {
-        if (data.error) {
-          listener({
-            ...data,
-            status: "error",
-          })
-        } else {
-          listener(data)
-        }
-      }
-    )
+    this.blockchain.on(method, ({ data, meta }: { data: any[]; meta: any }) => {
+      listener({
+        status: "success",
+        data,
+        meta,
+      })
+    })
   }
 
   _initSocketConnection = async () => {

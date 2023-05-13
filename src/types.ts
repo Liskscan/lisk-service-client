@@ -11,19 +11,28 @@
  *
  * Removal or modification of this copyright notice is prohibited.
  */
-import { ErrorResponse } from "./types/responses"
-import { Calls, CallsRPC, CallTypes, CallTypesRPC } from "./types/api"
-import { Events, EventsMethodResponses } from "./types/events"
+import {
+  Calls,
+  CallsRPC,
+  CallTypes,
+  CallTypesRPC,
+  ErrorResponse,
+  Events,
+  EventsMethodResponses,
+} from "./types"
 
 export type FromToNumber = `${number}:${number}`
 export type NumberString = `${number}`
 export type Beddows = `${number}`
 export type NumberStringAndFromToNumber = NumberString | FromToNumber
 export type Sort<T extends string> = `${T}:asc` | `${T}:desc`
+export * from "./types/index"
+
 export interface LimitOffset {
   limit?: number
   offset?: number
 }
+
 export type ChainID = NumberString
 export type Networks = "mainnet" | "testnet" | "betanet" | "alphanet" | "devnet"
 export type ExecutionStatus = "pending" | "success" | "fail"
