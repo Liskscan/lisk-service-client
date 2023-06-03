@@ -1,6 +1,6 @@
 {
   "name": "@liskscan/lisk-service-client",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Lisk service ts client",
   "main": "lib/index.js",
   "scripts": {

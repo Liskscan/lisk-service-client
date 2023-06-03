@@ -93,30 +93,34 @@ export class LiskService implements LiskServiceClass {
     }
     try {
       return new Promise((resolve, reject) => {
-        this.socket.emit(
-          "request",
-          {
-            jsonrpc: "2.0",
-            id: 1,
-            method: call,
-            params,
-          },
-          (response: any) => {
-            if (response.result) {
-              resolve({
-                status: "success",
-                ...response.result,
-              })
-            } else {
-              resolve({
-                status: "error",
-                error: true,
-                message: response.error.message,
-              } as ErrorResponse)
+        try {
+          this.socket.emit(
+            "request",
+            {
+              jsonrpc: "2.0",
+              id: 1,
+              method: call,
+              params,
+            },
+            (response: any) => {
+              if (response.result) {
+                resolve({
+                  status: "success",
+                  ...response.result,
+                })
+              } else {
+                resolve({
+                  status: "error",
+                  error: true,
+                  message: response.error.message,
+                } as ErrorResponse)
+              }
             }
-          }
-        )
-        setTimeout(() => reject("Timed out!"), 5000)
+          )
+          setTimeout(() => reject("Timed out!"), 5000)
+        } catch (e) {
+          this._initSocketConnection()
+        }
       }).catch((e) => {
         return {
           status: "error",
