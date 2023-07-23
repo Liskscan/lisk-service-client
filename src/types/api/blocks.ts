@@ -35,40 +35,42 @@ export interface BlocksAssetsParams extends LimitOffset {
   sort?: Sort<"height"> | Sort<"timestamp">
 }
 
+export interface Block {
+  id: string
+  version: number
+  height: number
+  timestamp: number
+  previousBlockId: string
+  generator: {
+    address: string
+    name: string
+    publicKey: string
+  }
+  transactionRoot: string
+  assetsRoot: string
+  stateRoot: string
+  maxHeightGenerated: number
+  maxHeightPrevoted: number
+  validatorsHash: string
+  aggregateCommit: {
+    height: number
+    aggregationBits: string
+    certificateSignature: string
+  }
+  numberOfTransactions: number
+  numberOfAssets: number
+  numberOfEvents: number
+  totalBurnt: string
+  networkFee: string
+  totalForged: string
+  reward: string
+  signature: string
+  isFinal: boolean
+}
+
 export interface BlocksResponse extends ResponseStatus {
   status: Success
-  data: {
-    id: string
-    version: number
-    height: number
-    timestamp: number
-    previousBlockId: string
-    generator: {
-      address: string
-      name: string
-      publicKey: string
-    }
-    transactionRoot: string
-    assetsRoot: string
-    stateRoot: string
-    maxHeightGenerated: number
-    maxHeightPrevoted: number
-    validatorsHash: string
-    aggregateCommit: {
-      height: number
-      aggregationBits: string
-      certificateSignature: string
-    }
-    numberOfTransactions: number
-    numberOfAssets: number
-    numberOfEvents: number
-    totalBurnt: string
-    networkFee: string
-    totalForged: string
-    reward: string
-    signature: string
-    isFinal: boolean
-  }[]
+  data: Block[]
   meta: {
     count: number
     offset: number
@@ -81,7 +83,7 @@ export interface BlocksAssetsResponse extends ResponseStatus, MetaList {
   data: {
     block: {
       id: string
-      height: string
+      height: number
       timestamp: number
     }
     assets: {

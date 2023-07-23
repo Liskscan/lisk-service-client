@@ -41,7 +41,7 @@ export interface PoSRewardsLockedParams extends LimitOffset {
   name?: string
 }
 
-export type PoSConstantsParams = undefined
+export type PoSConstantsParams = never
 
 export interface PoSStakersParams extends LimitOffset {
   address?: string
@@ -77,20 +77,19 @@ export interface PoSValidatorsParams extends LimitOffset {
     | Sort<"name">
 }
 
+export interface Reward {
+  tokenID: NumberString
+  reward: Beddows
+}
+
 export interface PoSRewardsClaimableResponse extends ResponseStatus, MetaList {
   status: Success
-  data: {
-    tokenID: NumberString
-    reward: Beddows
-  }[]
+  data: Reward[]
 }
 
 export interface PoSRewardsLockedResponse extends ResponseStatus, MetaList {
   status: Success
-  data: {
-    tokenID: NumberString
-    reward: Beddows
-  }[]
+  data: Reward[]
 }
 
 export interface PoSConstantsResponse extends ResponseStatus {
@@ -118,14 +117,23 @@ export interface PoSConstantsResponse extends ResponseStatus {
   meta: {}
 }
 
+export interface Stake {
+  address: string
+  amount: Beddows
+  name?: string
+}
+
+export interface Staker {
+  address: string
+  amount: Beddows
+  name?: string
+  publicKey?: string
+}
+
 export interface PoSStakersResponse extends ResponseStatus {
   status: Success
   data: {
-    stakers: {
-      address: string
-      amount: Beddows
-      name: string
-    }[]
+    stakers: Stake[]
   }
   meta: {
     validator: {
@@ -142,16 +150,12 @@ export interface PoSStakersResponse extends ResponseStatus {
 export interface PoSStakesResponse extends ResponseStatus {
   status: Success
   data: {
-    stakes: {
-      address: string
-      amount: Beddows
-      name: string
-    }[]
+    stakes: Stake[]
   }
   meta: {
     staker: {
       address: string
-      publicKey: string
+      publicKey?: string
       name: string
     }
     count: number
@@ -170,6 +174,7 @@ export interface PoSUnlocksResponse extends ResponseStatus {
       tokenID: NumberString
       unstakeHeight: number
       expectedUnlockableHeight: number
+      expectedUnlockTime: number
       isLocked: boolean
     }[]
   }

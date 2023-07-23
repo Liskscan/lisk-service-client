@@ -13,12 +13,13 @@
  */
 import { MetaList, ResponseStatus, Success } from "../responses"
 import {
+  AmountEntry,
   Beddows,
   ChainID,
   LimitOffset,
   Networks,
   NumberString,
-  Sort,
+  Sort
 } from "../../types"
 
 export type BlockchainAppsCall = "blockchain/apps"
@@ -42,7 +43,7 @@ export type BlockchainAppStatus = "registered" | "active" | "terminated"
 export interface BlockchainAppsParams extends LimitOffset {
   chainID?: ChainID
   status?: BlockchainAppStatus
-  name?: string
+  chainName?: string
   search?: string
 }
 
@@ -50,6 +51,7 @@ export type BlockchainAppsStatisticsParams = never
 
 export interface BlockchainAppsMetaParams extends LimitOffset {
   chainName?: string
+  displayName?: string
   chainID?: ChainID
   isDefault?: boolean
   network?: Networks
@@ -82,16 +84,13 @@ export interface BlockchainAppsMetaTokensSupportedParams extends LimitOffset {
 export interface BlockchainAppsResponse extends ResponseStatus, MetaList {
   status: Success
   data: {
-    name: string
+    chainName: string
     chainID: ChainID
     status: BlockchainAppStatus
     address: string
     lastCertificateHeight: number
     lastUpdated: number
-    escrow: {
-      tokenID: NumberString
-      amount: Beddows
-    }[]
+    escrow: AmountEntry[]
   }[]
 }
 
@@ -112,6 +111,7 @@ export interface BlockchainAppsMetaResponse extends ResponseStatus, MetaList {
   status: Success
   data: {
     chainName: string
+    displayName: string
     chainID: ChainID
     title: string
     status: BlockchainAppStatus
@@ -120,15 +120,16 @@ export interface BlockchainAppsMetaResponse extends ResponseStatus, MetaList {
     isDefault: boolean
     genesisURL: string
     projectPage: string
+    appPage: string
     serviceURLs: {
       http: string
       ws: string
+      apiCertificatePublicKey: string
     }[]
     logo: {
       png: string
       svg: string
     }
-    appPage: string
     backgroundColor: string
     explorers: {
       url: string
@@ -137,13 +138,12 @@ export interface BlockchainAppsMetaResponse extends ResponseStatus, MetaList {
     appNodes: {
       url: string
       maintainer: string
+      apiCertificatePublicKey: string
     }[]
   }[]
 }
 
-export interface BlockchainAppsMetaListResponse
-  extends ResponseStatus,
-    MetaList {
+export interface BlockchainAppsMetaListResponse extends ResponseStatus, MetaList {
   status: Success
   data: {
     chainName: string

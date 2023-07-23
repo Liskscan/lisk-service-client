@@ -104,12 +104,18 @@ export interface TransactionsResponse extends ResponseStatus, MetaList {
     sender: {
       address: string
       publicKey: string
-      name: string
+      name?: string
     }
-    params: any
+    params: Record<string, any>
     executionStatus: ExecutionStatus
     index: number
-    meta?: any
+    meta?: {
+      recipient: {
+        address: string
+        publicKey?: string
+        name?: string
+      }
+    }
   }[]
 }
 

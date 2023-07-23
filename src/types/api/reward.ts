@@ -24,7 +24,7 @@ export type RewardDefaultCallRPC = "get.reward.default"
 export interface RewardAnnualInflationParams {
   height: number
 }
-export type RewardConstantsParams = undefined
+export type RewardConstantsParams = never
 export interface RewardDefaultParams {
   height: number
 }

@@ -12,7 +12,7 @@
  * Removal or modification of this copyright notice is prohibited.
  */
 import { ResponseStatus, Success } from "../responses"
-import { Beddows, LimitOffset, NumberString } from "../../types"
+import { Beddows, LimitOffset, NumberString, Sort } from "../../types"
 
 export type TokenAccountExistCall = "token/account/exist"
 export type TokenAccountExistCallRPC = "get.token.account.exist"
@@ -29,12 +29,19 @@ export interface TokenAccountExistParams {
   name?: string
   tokenID?: string
 }
+export interface TokenAvailableIDsParams extends LimitOffset {}
 export interface TokenBalancesParams extends LimitOffset {
   address?: string
   tokenID?: string
 }
-export type TokenConstantsParams = undefined
-export type TokenSummaryParams = undefined
+export interface TokenBalancesTopParams extends LimitOffset {
+  address?: string
+  tokenID?: string
+  search?: string
+  sort?: Sort<"balance">
+}
+export type TokenConstantsParams = never
+export interface TokenSummaryParams extends LimitOffset {}
 
 export interface TokenAccountExistResponse extends ResponseStatus {
   status: Success
@@ -42,6 +49,21 @@ export interface TokenAccountExistResponse extends ResponseStatus {
     isExists: boolean
   }
   meta: {}
+}
+export interface TokenBalancesTopResponse extends ResponseStatus {
+  status: Success
+  data: Record<string, {
+    address: string
+    publicKey?: string
+    name?: string
+    balance: Beddows
+    knowledge: Record<string, any>
+  }[]>
+  meta: {
+    total: number
+    count: number
+    offset: number
+  }
 }
 export interface TokenBalancesResponse extends ResponseStatus {
   status: Success
@@ -70,29 +92,34 @@ export interface TokenConstantsResponse extends ResponseStatus {
   }
   meta: {}
 }
+export interface TokenAvailableIDsResponse extends ResponseStatus {
+  status: Success
+  data: {
+    tokenIDs: string[]
+  }
+  meta: {
+    count: number
+    offset: number
+    total: number
+  }
+}
 export interface TokenSummaryResponse extends ResponseStatus {
   status: Success
   data: {
-    escrowedAmounts: [
-      {
+    escrowedAmounts: {
         escrowChainID: NumberString
         tokenID: NumberString
         amount: Beddows
-      }
-    ]
-    supportedTokens: [
-      {
+      }[]
+    supportedTokens: {
         isSupportAllTokens: boolean
         patternTokenIDs: string[]
         exactTokenIDs: NumberString[]
-      }
-    ]
-    totalSupply: [
-      {
+      }[]
+    totalSupply: {
         tokenID: NumberString
         amount: Beddows
-      }
-    ]
+      }[]
   }
   meta: {}
 }

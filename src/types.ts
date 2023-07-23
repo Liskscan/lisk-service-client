@@ -23,6 +23,10 @@ import {
   PostCallTypesRPC,
 } from "./types"
 
+export interface AmountEntry {
+  tokenID: string;
+  amount: string;
+}
 export type FromToNumber = `${number}:${number}`
 export type NumberString = `${number}`
 export type Beddows = `${number}`

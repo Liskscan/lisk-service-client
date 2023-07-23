@@ -42,7 +42,7 @@ export interface ExportTransactionsResponse extends ResponseStatus {
     fileUrl: string
   }
   meta: {
-    ready: true
+    ready: boolean
   }
   links: {}
 }

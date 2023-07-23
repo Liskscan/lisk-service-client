@@ -16,7 +16,7 @@ import { ResponseStatus, Success } from "../responses"
 export type MarketPricesCall = "market/prices"
 export type MarketPricesCallRPC = "get.market.prices"
 
-export type MarketPricesParams = undefined
+export type MarketPricesParams = never
 
 export interface MarketPricesResponse extends ResponseStatus {
   status: Success

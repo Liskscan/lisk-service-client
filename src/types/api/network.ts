@@ -13,10 +13,11 @@
  */
 import { MetaList, ResponseStatus, Success } from "../responses"
 import {
+  AmountEntry,
   LimitOffset,
   NumberString,
   NumberStringAndFromToNumber,
-  Sort,
+  Sort
 } from "../../types"
 
 export type NetworkPeersCall = "network/peers"
@@ -43,14 +44,13 @@ export interface NetworkPeersResponse extends ResponseStatus, MetaList {
     ip: string
     port: number
     networkVersion: string
-    chainID: NumberString
+    chainID?: NumberString
     state: string
-    height: number
+    height?: number
     location?: {
       countryCode?: string
       countryName?: string
       hostname?: string
-      ip: string
       latitude?: string
       longitude?: string
     }
@@ -67,20 +67,9 @@ export interface NetworkStatisticsResponse extends ResponseStatus {
     }
     height: Record<string, number>
     networkVersion: Record<string, number>
-    totalLocked: [
-      {
-        tokenID: NumberString
-        amount: NumberString
-      }
-    ]
-    totalStaked: {
-      tokenID: NumberString
-      amount: NumberString
-    }
-    totalSelfStaked: {
-      tokenID: NumberString
-      amount: NumberString
-    }
+    totalLocked: AmountEntry[]
+    totalStaked: AmountEntry
+    totalSelfStaked: AmountEntry
   }
 }
 
@@ -104,6 +93,7 @@ export interface NetworkStatusResponse extends ResponseStatus {
       maxTransactionsSize: number
       bftBatchSize: number
     }
+    genesisHeight: number
     registeredModules: string[]
     moduleCommands: string[]
     network: {
@@ -116,7 +106,7 @@ export interface NetworkStatusResponse extends ResponseStatus {
     }
   }
   meta: {
-    lastUpdate: NumberString
+    lastUpdate: number
     lastBlockHeight: number
     lastBlockID: string
   }

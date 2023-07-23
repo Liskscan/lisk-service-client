@@ -16,7 +16,7 @@ import { ResponseStatus, Success } from "../responses"
 export type SchemasCall = "schemas"
 export type SchemasCallRPC = "get.schemas"
 
-export type SchemasParams = undefined
+export type SchemasParams = never
 
 export type Schema = {
   $id: string
@@ -30,9 +30,18 @@ export type Assets = { module: string; version: string; schema: Schema }
 export type Events = { module: string; name: string; schema: Schema }
 export interface SchemasResponse extends ResponseStatus {
   status: Success
-  data: Record<
-    string,
-    { schema: Schema } | Events[] | Assets[] | Command[] | Messages[]
-  >
+  data: {
+    block: {schema: Schema}
+    header: {schema: Schema}
+    asset: {schema: Schema}
+    transaction: {schema: Schema}
+    event: {schema: Schema}
+    standardEvent: {schema: Schema}
+    ccm: {schema: Schema}
+    events: Events[]
+    assets: Assets[]
+    commands: Command[]
+    messages: Messages[]
+  }
   meta: {}
 }

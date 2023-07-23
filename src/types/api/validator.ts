@@ -25,6 +25,7 @@ export interface ValidatorResponse extends ResponseStatus {
   data: {
     generatorKey: string
     blsKey: string
+    proofOfPossession: string
   }
   meta: {
     address: string

@@ -12,9 +12,14 @@
  * Removal or modification of this copyright notice is prohibited.
  */
 import { MetaList, ResponseStatus, Success } from "../responses"
+import { LimitOffset } from "../../types"
 
 export type GeneratorsCall = "generators"
 export type GeneratorsCallRPC = "get.generators"
+
+export interface GeneratorsParams extends LimitOffset {
+  search?: string
+}
 
 export interface GeneratorsResponse extends ResponseStatus, MetaList {
   status: Success

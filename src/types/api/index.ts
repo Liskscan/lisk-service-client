@@ -64,8 +64,8 @@ import {
 import { FeesCall, FeesCallRPC, FeesParams, FeesResponse } from "./fees"
 import {
   GeneratorsCall,
-  GeneratorsCallRPC,
-  GeneratorsResponse,
+  GeneratorsCallRPC, GeneratorsParams,
+  GeneratorsResponse
 } from "./generators"
 import {
   InvokeCall,
@@ -159,11 +159,11 @@ import {
   TokenAccountExistCall,
   TokenAccountExistCallRPC,
   TokenAccountExistParams,
-  TokenAccountExistResponse,
+  TokenAccountExistResponse, TokenAvailableIDsParams, TokenAvailableIDsResponse,
   TokenBalancesCall,
   TokenBalancesCallRPC,
   TokenBalancesParams,
-  TokenBalancesResponse,
+  TokenBalancesResponse, TokenBalancesTopParams, TokenBalancesTopResponse,
   TokenConstantsCall,
   TokenConstantsCallRPC,
   TokenConstantsParams,
@@ -171,7 +171,7 @@ import {
   TokenSummaryCall,
   TokenSummaryCallRPC,
   TokenSummaryParams,
-  TokenSummaryResponse,
+  TokenSummaryResponse
 } from "./token"
 import {
   PostTransactionsCallRPC,
@@ -324,7 +324,7 @@ export type CallTypes = {
   }
   generators: {
     response: GeneratorsResponse
-    params: LimitOffset
+    params: GeneratorsParams
   }
   invoke: {
     response: InvokeResponse
@@ -402,9 +402,17 @@ export type CallTypes = {
     response: TokenAccountExistResponse
     params: TokenAccountExistParams
   }
+  "token/available-ids": {
+    response: TokenAvailableIDsResponse
+    params: TokenAvailableIDsParams
+  }
   "token/balances": {
     response: TokenBalancesResponse
     params: TokenBalancesParams
+  }
+  "token/balances/top": {
+    response: TokenBalancesTopResponse
+    params: TokenBalancesTopParams
   }
   "token/constants": {
     response: TokenConstantsResponse
@@ -547,9 +555,17 @@ export type CallTypesRPC = {
     response: TokenAccountExistResponse
     params: TokenAccountExistParams
   }
+  "get.token.available-ids": {
+    response: TokenAvailableIDsResponse
+    params: TokenAvailableIDsParams
+  }
   "get.token.balances": {
     response: TokenBalancesResponse
     params: TokenBalancesParams
+  }
+  "get.token.balances.top": {
+    response: TokenBalancesTopResponse
+    params: TokenBalancesTopParams
   }
   "get.token.constants": {
     response: TokenConstantsResponse
@@ -716,10 +732,14 @@ export {
   TokenAccountExistCallRPC,
   TokenAccountExistParams,
   TokenAccountExistResponse,
+  TokenAvailableIDsParams,
+  TokenAvailableIDsResponse,
   TokenBalancesCall,
   TokenBalancesCallRPC,
   TokenBalancesParams,
   TokenBalancesResponse,
+  TokenBalancesTopParams,
+  TokenBalancesTopResponse,
   TokenConstantsCall,
   TokenConstantsCallRPC,
   TokenConstantsParams,

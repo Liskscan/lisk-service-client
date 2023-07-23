@@ -26,7 +26,7 @@ export interface IndexStatusResponse extends ResponseStatus {
     lastIndexedBlockHeight: number
     chainLength: number
     numBlocksIndexed: number
-    percentageIndexed: string
+    percentageIndexed: number
     isIndexingInProgress: boolean
   }
   meta: {
